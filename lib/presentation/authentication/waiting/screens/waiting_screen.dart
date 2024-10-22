@@ -12,7 +12,6 @@ class WaitingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.read<AuthenticationAppCubit>();
     return BlocConsumer<AuthenticationAppCubit, AuthenticationAppStates>(
       listener: (context, state) {
         if (state is SuccessLogoutAppState) {
