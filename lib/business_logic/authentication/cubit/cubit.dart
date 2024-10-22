@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:meshwar/core/routing/routes.dart';
 import 'package:meshwar/core/shared/shared_preferences/shared_preferences.dart';
 import 'package:meshwar/core/shared/shared_preferences/shared_preferences_keys.dart';
 import 'package:meshwar/data/authentication/mdoels/login_user_model.dart';
@@ -51,6 +50,16 @@ class AuthenticationAppCubit extends Cubit<AuthenticationAppStates> {
       });
     } catch (error) {
       emit(ErrorLoginAppState(error: error.toString()));
+    }
+  }
+
+  sendFcmToken(String? fcmToken) async {
+    emit(LoadingSendingFCMTokenAppState());
+    try {
+      await authRemoteDataSource.sendFCMToken(fcmToken: fcmToken!);
+      emit(SuccessSendingFCMTokenAppState());
+    } catch (error) {
+      emit(ErrorSendingFCMTokenAppState(error: error.toString()));
     }
   }
 
@@ -131,33 +140,6 @@ class AuthenticationAppCubit extends Cubit<AuthenticationAppStates> {
       });
     } catch (error) {
       emit(ErrorRegisterAppState(error: error.toString()));
-    }
-  }
-
-  // send fcm token
-
-  sendFcmToken(String? fcmToken) async {
-    emit(LoadingSendingFCMTokenAppState());
-    try {
-      await authRemoteDataSource.sendFCMToken(fcmToken: fcmToken!);
-      emit(SuccessSendingFCMTokenAppState());
-    } catch (error) {
-      emit(ErrorSendingFCMTokenAppState(error: error.toString()));
-    }
-  }
-
-  // logout
-
-  logout(BuildContext context) async {
-    emit(LoadingLogoutAppState());
-    try {
-      authRemoteDataSource.logout();
-      SharedPreferencesService.removeData(key: SharedPreferencesKeys.userToken);
-      SharedPreferencesService.removeData(key: SharedPreferencesKeys.fcmToken);
-      Navigator.pushReplacementNamed(context, Routes.login);
-      emit(SuccessLogoutAppState());
-    } catch (error) {
-      emit(ErrorLogoutAppState(error: error.toString()));
     }
   }
 }

@@ -11,13 +11,13 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 class FCMNotificationService {
   static final FCMNotificationService _instance =
-      FCMNotificationService._internal();
+  FCMNotificationService._internal();
 
   factory FCMNotificationService() => _instance;
 
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   final FlutterLocalNotificationsPlugin _localNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  FlutterLocalNotificationsPlugin();
   String? fcmToken;
 
   FCMNotificationService._internal();
@@ -26,7 +26,7 @@ class FCMNotificationService {
     await Firebase.initializeApp();
 
     NotificationSettings settings =
-        await _firebaseMessaging.requestPermission();
+    await _firebaseMessaging.requestPermission();
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       print('User granted permission');
     } else {
@@ -35,10 +35,10 @@ class FCMNotificationService {
     }
 
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+    AndroidInitializationSettings('@mipmap/ic_launcher');
 
     const InitializationSettings initializationSettings =
-        InitializationSettings(
+    InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: null,
     );
@@ -53,7 +53,7 @@ class FCMNotificationService {
     });
 
     RemoteMessage? initialMessage =
-        await _firebaseMessaging.getInitialMessage();
+    await _firebaseMessaging.getInitialMessage();
     if (initialMessage != null) {
       _showNotification(initialMessage);
     }
@@ -67,7 +67,7 @@ class FCMNotificationService {
 
   Future<void> _showNotification(RemoteMessage message) async {
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails(
+    AndroidNotificationDetails(
       'your_channel_id',
       'your_channel_name',
       channelDescription: 'your_channel_description',

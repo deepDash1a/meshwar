@@ -4,9 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:meshwar/core/routing/routes.dart';
-import 'package:meshwar/core/shared/shared_preferences/shared_preferences.dart';
-import 'package:meshwar/core/shared/shared_preferences/shared_preferences_keys.dart';
 import 'package:meshwar/core/theme/colors/colors.dart';
 import 'package:meshwar/data/layout/models/home/notifications_model.dart';
 import 'package:meshwar/data/layout/models/maps/place_details_model.dart';
@@ -248,19 +245,6 @@ class LayoutAppCubit extends Cubit<LayoutAppStates> {
       emit(SuccessUpdateProfileDataAppState());
     } catch (error) {
       emit(ErrorUpdateProfileDataAppState(error: error.toString()));
-    }
-  }
-
-  logout(BuildContext context) async {
-    emit(LoadingLogoutAppState());
-    try {
-      layoutRemoteDataSource.logout();
-      SharedPreferencesService.removeData(key: SharedPreferencesKeys.userToken);
-      SharedPreferencesService.removeData(key: SharedPreferencesKeys.fcmToken);
-      Navigator.pushReplacementNamed(context, Routes.login);
-      emit(SuccessLogoutAppState());
-    } catch (error) {
-      emit(ErrorLogoutAppState(error: error.toString()));
     }
   }
 }

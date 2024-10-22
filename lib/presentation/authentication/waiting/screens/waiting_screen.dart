@@ -61,7 +61,7 @@ class WaitingScreen extends StatelessWidget {
                       CustomTextButton(
                         text: 'تسجيل الخروج',
                         function: () {
-                          cubit.logout(context);
+                          logout(context);
                         },
                       ),
                     ],

@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:meshwar/core/routing/routes.dart';
+import 'package:meshwar/core/shared/shared_preferences/shared_preferences.dart';
+import 'package:meshwar/core/shared/shared_preferences/shared_preferences_keys.dart';
 import 'package:meshwar/core/theme/colors/colors.dart';
 import 'package:meshwar/core/theme/fonts/fonts.dart';
 
@@ -44,4 +47,10 @@ Response handleStatusCode(Response response) {
     default:
       throw Exception('Unexpected error: ${response.statusCode}');
   }
+}
+
+logout(BuildContext context) {
+  Navigator.pushReplacementNamed(context, Routes.login);
+  SharedPreferencesService.removeData(key: SharedPreferencesKeys.userToken);
+  SharedPreferencesService.removeData(key: SharedPreferencesKeys.fcmToken);
 }

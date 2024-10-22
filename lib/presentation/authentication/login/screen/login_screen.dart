@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meshwar/core/shared/widgets/app_background.dart';
-import 'package:meshwar/core/shared/widgets/custom_text_button.dart';
 import 'package:meshwar/core/shared/widgets/texts.dart';
 import 'package:meshwar/core/theme/colors/colors.dart';
 import 'package:meshwar/core/theme/images/images.dart';
@@ -27,15 +26,6 @@ class LoginScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: CustomTextButton(
-                          text: 'تخطي'.toUpperCase(),
-                          function: () {},
-                          color: ColorsManager.mainAppColor,
-                        ),
-                      ),
-                      SizedBox(height: 100.00.h),
                       const ExtraBoldText25dark(text: 'تسجيل الدخول'),
                       SizedBox(height: 20.00.h),
                       Image.asset(

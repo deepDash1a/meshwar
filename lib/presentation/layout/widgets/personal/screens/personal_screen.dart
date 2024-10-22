@@ -18,13 +18,6 @@ class PersonalScreen extends StatelessWidget {
 
     return BlocConsumer<LayoutAppCubit, LayoutAppStates>(
       listener: (context, state) {
-        if (state is SuccessLogoutAppState) {
-          customSnackBar(
-            context: context,
-            text: 'تم تسجيل الخروج بنجاح',
-            color: ColorsManager.green,
-          );
-        }
         if (state is SuccessUpdateProfileDataAppState) {
           customSnackBar(
             context: context,
@@ -270,51 +263,46 @@ class PersonalScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 20.00.h),
-                        state is LoadingLogoutAppState
-                            ? const Center(
-                                child: CircularProgressIndicator(),
-                              )
-                            : CustomTextButton(
-                                text: 'تسجيل الخروج',
-                                function: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: const BoldText18dark(
-                                          text: 'تأكيد',
-                                        ),
-                                        content: const BoldText14dark(
-                                            color: ColorsManager.black,
-                                            text:
-                                                'هل انت متأكد من أنك تريد تسجيل الخروج؟'),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context)
-                                                  .pop(); // Close the dialog
-                                            },
-                                            child: const BoldText14dark(
-                                              text: 'لا',
-                                            ),
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              cubit.logout(context);
-                                              Navigator.of(context)
-                                                  .pop(); // Close the dialog
-                                            },
-                                            child: const BoldText14dark(
-                                              text: 'نعم',
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                        SizedBox(height: 350.00.h),
+                        CustomTextButton(
+                          text: 'تسجيل الخروج',
+                          function: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const BoldText18dark(
+                                    text: 'تأكيد',
+                                  ),
+                                  content: const BoldText14dark(
+                                      color: ColorsManager.black,
+                                      text:
+                                          'هل انت متأكد من أنك تريد تسجيل الخروج؟'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pop(); // Close the dialog
+                                      },
+                                      child: const BoldText14dark(
+                                        text: 'لا',
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        logout(context);
+                                      },
+                                      child: const BoldText14dark(
+                                        text: 'نعم',
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        ),
+                        SizedBox(height: 100.00.h),
                       ],
                     ),
             ),

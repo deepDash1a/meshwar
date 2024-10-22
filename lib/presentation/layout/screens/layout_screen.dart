@@ -102,13 +102,13 @@ class LayoutScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: isSelected
-                  ? ColorsManager.white.withOpacity(0.4)
+                  ? ColorsManager.white.withOpacity(0.5)
                   : ColorsManager.transparent,
               shape: BoxShape.circle,
               boxShadow: isSelected
                   ? [
-                      BoxShadow(
-                        color: ColorsManager.white.withOpacity(0.4),
+                      const BoxShadow(
+                        color: ColorsManager.deepOrange,
                         blurRadius: 10,
                         spreadRadius: 5,
                       ),
@@ -118,7 +118,7 @@ class LayoutScreen extends StatelessWidget {
             child: icon,
           ),
           const SizedBox(height: 5),
-          BoldText12dark(
+          ExtraBoldText12dark(
             text: label,
             color: ColorsManager.white,
           ),
@@ -131,7 +131,7 @@ class LayoutScreen extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10.00.h),
       decoration: BoxDecoration(
-        color: ColorsManager.mainAppColor,
+        color: ColorsManager.mainAppColor.withOpacity(0.5),
         borderRadius: BorderRadius.circular(20.00.r),
         boxShadow: [
           BoxShadow(
