@@ -20,6 +20,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FCMNotificationService().init();
   await LocationHelper.getCurrentAddress();
+  // print('fcm token ${FCMNotificationService().fcmToken}');
   await SharedPreferencesService.init();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
