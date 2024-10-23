@@ -13,5 +13,6 @@ class EndPoints {
   static const String acceptTrip = '/trips/208/accept';
   static const String startTrip = '/trips/208/start';
   static const String startShift = '/shift/start-store';
+  static const String getCars = '/cars';
 
 }

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meshwar/core/shared/shared_preferences/shared_preferences.dart';
 import 'package:meshwar/core/shared/shared_preferences/shared_preferences_keys.dart';
-import 'package:meshwar/data/authentication/mdoels/login_user_model.dart';
+import 'package:meshwar/data/authentication/models/login_user_model.dart';
 import 'package:meshwar/data/authentication/remote_data_source/remote_data_source.dart';
 
 part 'states.dart';

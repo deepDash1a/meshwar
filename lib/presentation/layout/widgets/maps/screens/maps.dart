@@ -22,7 +22,7 @@ class MapScreen extends StatefulWidget {
   State<MapScreen> createState() => _MapScreenState();
 }
 
-class _MapScreenState extends State<MapScreen> {
+class _MapScreenState extends State<MapScreen>  {
   static final CameraPosition myCurrentCameraPosition = CameraPosition(
     bearing: 0.00,
     tilt: 0.00,
@@ -40,6 +40,7 @@ class _MapScreenState extends State<MapScreen> {
 
   // these vars for get place location
   Set<Marker> markers = {};
+  Set<Polyline> polylines = {};
   late PlacesSuggestion placesSuggestion;
   late Place selectedPlace;
   late Marker searchedPlaceMarker;
@@ -65,6 +66,7 @@ class _MapScreenState extends State<MapScreen> {
       zoomControlsEnabled: false,
       myLocationButtonEnabled: false,
       markers: markers,
+      polylines: polylines,
       initialCameraPosition: myCurrentCameraPosition,
       onMapCreated: (GoogleMapController googleMapController) {
         completer.complete(googleMapController);
@@ -223,11 +225,30 @@ class _MapScreenState extends State<MapScreen> {
       ),
     );
     addMarkerToMarkersAndUpdateUI(searchedPlaceMarker);
+    // drawPolylineBetweenCurrentAndSearched(); // add poly line
   }
 
   void addMarkerToMarkersAndUpdateUI(Marker marker) {
     setState(() {
       markers.add(marker);
+    });
+  }
+
+  void drawPolylineBetweenCurrentAndSearched() {
+    final Polyline polyline = Polyline(
+      polylineId: const PolylineId('route'),
+      points: [
+        LatLng(LocationHelper.currentPosition!.latitude,
+            LocationHelper.currentPosition!.longitude),
+        LatLng(selectedPlace.result.geometry.location.lat,
+            selectedPlace.result.geometry.location.lng),
+      ],
+      color: Colors.blue,
+      width: 4,
+    );
+
+    setState(() {
+      polylines.add(polyline);
     });
   }
 

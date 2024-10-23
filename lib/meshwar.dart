@@ -32,7 +32,8 @@ class MeshwarApp extends StatelessWidget {
           BlocProvider(
             create: (context) => getIt<LayoutAppCubit>()
               ..getProfileData()
-              ..getNotifications(),
+              ..getNotifications()
+              ..getCars(),
           ),
         ],
         child: MaterialApp(

@@ -53,6 +53,16 @@ class ErrorStartShiftAppState extends LayoutAppStates {
   ErrorStartShiftAppState({required this.error});
 }
 
+class LoadingGetCarsAppState extends LayoutAppStates {}
+
+class SuccessGetCarsAppState extends LayoutAppStates {}
+
+class ErrorGetCarsAppState extends LayoutAppStates {
+  final String error;
+
+  ErrorGetCarsAppState({required this.error});
+}
+
 // maps
 class PlacesLoaded extends LayoutAppStates {
   final List<dynamic> placesSuggestion;

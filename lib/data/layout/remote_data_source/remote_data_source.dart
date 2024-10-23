@@ -127,6 +127,27 @@ class LayoutRemoteDataSource {
     }
   }
 
+  Future<Response> getCars() async {
+    try {
+      final response = await dioHelper.getData(
+        url: EndPoints.getCars,
+      );
+
+      return handleStatusCode(response);
+    } catch (e) {
+      if (e is DioException) {
+        if (e.response != null) {
+          throw Exception(
+              'Error: ${e.response?.statusCode} - ${e.response?.statusMessage}');
+        } else {
+          throw Exception('Error: ${e.message}');
+        }
+      } else {
+        throw Exception('Failed to log in: $e');
+      }
+    }
+  }
+
   // map
   Future<List<dynamic>> getSuggestions(String place) async {
     try {

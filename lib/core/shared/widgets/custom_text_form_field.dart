@@ -10,7 +10,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.controller,
     required this.label,
     required this.validatorText,
-    required this.regexValidateText,
+    this.regexValidateText,
     this.obscureText = false,
     this.appRegex,
     this.suffixIcon,
@@ -28,7 +28,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget? suffixIcon;
   TextInputType? textInputType;
   final String validatorText;
-  final String regexValidateText;
+  String? regexValidateText;
 
   @override
   Widget build(BuildContext context) {

@@ -22,13 +22,8 @@ class CustomButton extends StatelessWidget {
       onPressed: () {
         onPressed();
       },
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12), // Set border radius here
-      ),
-      padding: EdgeInsets.zero,
-      // Remove padding to fill the button with the gradient
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10.00.w),
+        padding: EdgeInsets.symmetric(horizontal: 5.00.w),
         decoration: BoxDecoration(
           gradient: const LinearGradient(
             colors: [
@@ -39,12 +34,12 @@ class CustomButton extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(
-              20.r), // Match border radius for consistency
+              15.r), // Match border radius for consistency
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: 50.00.w,
-            vertical: 14.00.h,
+            vertical: 10.00.h,
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,

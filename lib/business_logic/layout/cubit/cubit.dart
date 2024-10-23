@@ -4,10 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:meshwar/core/shared/location_helper/location_helper.dart';
 import 'package:meshwar/core/theme/colors/colors.dart';
 import 'package:meshwar/data/layout/models/home/notifications_model.dart';
 import 'package:meshwar/data/layout/models/maps/place_details_model.dart';
-import 'package:meshwar/data/layout/models/perosnal/profile_model.dart';
+import 'package:meshwar/data/layout/models/personal/profile_model.dart';
+import 'package:meshwar/data/layout/models/shift/cars_model.dart';
+import 'package:meshwar/data/layout/models/shift/shift_model.dart';
 import 'package:meshwar/data/layout/remote_data_source/remote_data_source.dart';
 import 'package:meshwar/presentation/layout/widgets/home/screens/home.dart';
 import 'package:meshwar/presentation/layout/widgets/maps/screens/maps.dart';
@@ -38,17 +41,37 @@ class LayoutAppCubit extends Cubit<LayoutAppStates> {
     emit(OnItemTappedAppState());
   }
 
-  Future<void> pickImageAndAssign(ImageSource source, XFile? newImage) async {
+  // Future<void> pickImageAndAssign(ImageSource source, XFile? newImage) async {
+  //   final ImagePicker picker = ImagePicker();
+  //
+  //   final XFile? pickedImage = await picker.pickImage(source: source);
+  //
+  //   if (pickedImage != null) {
+  //     newImage = pickedImage;
+  //     emit(SuccessPickImageAppState());
+  //   } else {
+  //     emit(ErrorPickImageAppState());
+  //   }
+  // }
+
+  // getImage(ImageSource imageSource, XFile? newImage) async {
+  //   XFile? result = await ImagePicker().pickImage(source: imageSource);
+  //
+  //   if (result != null) {
+  //     newImage = result;
+  //     emit(SuccessPickImageAppState());
+  //   }
+  //   emit(ErrorPickImageAppState());
+  // }
+
+  Future<XFile?> pickImage(ImageSource source) async {
     final ImagePicker picker = ImagePicker();
 
-    final XFile? pickedImage = await picker.pickImage(source: source);
+    XFile? selectedImage = await picker.pickImage(source: source);
 
-    if (pickedImage != null) {
-      newImage = pickedImage;
-      emit(SuccessPickImageAppState());
-    } else {
-      emit(ErrorPickImageAppState());
-    }
+    emit(SuccessPickImageAppState());
+
+    return selectedImage;
   }
 
   // home
@@ -71,8 +94,6 @@ class LayoutAppCubit extends Cubit<LayoutAppStates> {
               getAllNotifications!.body!.where((notification) {
             return notification.data?.content != null;
           }).toList();
-
-          print(messagesNotifications);
         },
       );
       emit(SuccessNotificationsAppState());
@@ -102,25 +123,45 @@ class LayoutAppCubit extends Cubit<LayoutAppStates> {
   }
 
   // shift
+  GetAllCarsModel? getAllCars;
+  ShiftModel? shiftModel;
+
+  int? selectedCarTypeValue;
+  XFile? odometerImage;
+  var carOdometerStart = TextEditingController();
 
   startShift() async {
     emit(LoadingStartShiftAppState());
     try {
-      // layoutRemoteDataSource
-      //     .startShift(
-      //       odometerImage,
-      //       carTypeId: carTypeId,
-      //       odometerStart: odometerStart,
-      //       locationName: locationName,
-      //       latitude: latitude,
-      //       longitude: longitude,
-      //     )
-      //     .then((value) {})
-      //     .catchError((error) {});
-
-      emit(SuccessStartShiftAppState());
+      layoutRemoteDataSource
+          .startShift(
+        odometerImage,
+        carTypeId: selectedCarTypeValue!,
+        odometerStart: carOdometerStart.text,
+        locationName: LocationHelper.currentAddress,
+        latitude: LocationHelper.currentPosition!.latitude,
+        longitude: LocationHelper.currentPosition!.longitude,
+      )
+          .then((value) {
+        shiftModel = ShiftModel.fromJson(value.data);
+        emit(SuccessStartShiftAppState());
+      });
     } catch (error) {
       emit(ErrorStartShiftAppState(error: error.toString()));
+    }
+  }
+
+  getCars() {
+    emit(LoadingGetCarsAppState());
+
+    try {
+      layoutRemoteDataSource.getCars().then((value) {
+        getAllCars = GetAllCarsModel.fromJson(value.data);
+      }).catchError((error) {
+        emit(ErrorGetCarsAppState(error: error.toString()));
+      });
+    } catch (error) {
+      emit(ErrorGetCarsAppState(error: error.toString()));
     }
   }
 

@@ -16,6 +16,8 @@ class ImagesManager {
   static const String noNotifications = 'assets/images/no_notifications.png';
   static const String starUser = 'assets/images/star_user.png';
   static const String messages = 'assets/images/messages.png';
+  static const String camera = 'assets/images/camera.png';
+  static const String gallery = 'assets/images/gallery.png';
   static const String noData = 'assets/images/no_data.png';
   static const String getCurrentLocation =
       'assets/images/get_current_location.png';
