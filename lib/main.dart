@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meshwar/core/di/dependency_injection.dart';
 import 'package:meshwar/core/routing/app_router.dart';
 import 'package:meshwar/core/shared/bloc_observer/bloc_observer.dart';
-import 'package:meshwar/core/shared/functions/functions.dart';
 import 'package:meshwar/core/shared/location_helper/location_helper.dart';
 import 'package:meshwar/core/shared/notification_helper/notification_helper.dart';
 import 'package:meshwar/core/shared/shared_preferences/shared_preferences.dart';
