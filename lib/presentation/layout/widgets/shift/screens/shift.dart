@@ -25,7 +25,6 @@ class ShiftScreen extends StatelessWidget {
     return SafeArea(
       child: BlocConsumer<LayoutAppCubit, LayoutAppStates>(
         listener: (context, state) {
-          // TODO: implement listener
         },
         builder: (context, state) {
           return Form(
