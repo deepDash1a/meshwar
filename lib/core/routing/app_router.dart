@@ -1,58 +1,115 @@
 import 'package:flutter/material.dart';
 import 'package:meshwar/core/routing/routes.dart';
-import 'package:meshwar/presentation/authentication/login/screen/login_screen.dart';
-import 'package:meshwar/presentation/authentication/register/screen/register_screen.dart';
-import 'package:meshwar/presentation/authentication/waiting/screens/waiting_screen.dart';
-import 'package:meshwar/presentation/layout/screens/layout_screen.dart';
-import 'package:meshwar/presentation/layout/widgets/home/screens/home.dart';
-import 'package:meshwar/presentation/layout/widgets/home/widgets/messages.dart';
-import 'package:meshwar/presentation/layout/widgets/maps/screens/maps.dart';
-import 'package:meshwar/presentation/layout/widgets/personal/screens/personal_screen.dart';
-import 'package:meshwar/presentation/start/screen/start_screen.dart';
+import 'package:meshwar/presentation/auth/login/login_screen.dart';
+import 'package:meshwar/presentation/auth/register/ask_user_role/ask_user_role.dart';
+import 'package:meshwar/presentation/auth/register/captain/captain_register_screen.dart';
+import 'package:meshwar/presentation/auth/register/passenger/passenger_register_screen.dart';
+import 'package:meshwar/presentation/auth/waiting_screen/waiting_screen.dart';
+import 'package:meshwar/presentation/home/passenger/screen/passenger_home_screen.dart';
+import 'package:meshwar/presentation/home/passenger/widget/passenger_carpool/build_new_carpool/screen/passenger_build_new_carpool.dart';
+import 'package:meshwar/presentation/home/passenger/widget/passenger_carpool/my_carpools/screen/passenger_build_my_carpools.dart';
+import 'package:meshwar/presentation/home/passenger/widget/passenger_carpool/my_current_carpools/screens/passenger_build_my_current_carpools.dart';
+import 'package:meshwar/presentation/home/passenger/widget/passenger_carpool/passenger_carpool.dart';
+import 'package:meshwar/presentation/home/passenger/widget/passenger_carpool/rate_carpool/screen/passenger_build_rate_carpools.dart';
+import 'package:meshwar/presentation/home/passenger/widget/passenger_personal_page/screen/passenger_personal_page.dart';
+import 'package:meshwar/presentation/home/passenger/widget/passenger_trips/passenger_accepted_trips/passenger_accepted_trips.dart';
+import 'package:meshwar/presentation/home/passenger/widget/passenger_trips/passenger_finished_trips/passenger_finished_trips.dart';
+import 'package:meshwar/presentation/home/passenger/widget/passenger_trips/passenger_request_trips/screen/passenger_request_trips.dart';
+import 'package:meshwar/presentation/home/passenger/widget/passenger_trips/passenger_trips.dart';
+import 'package:meshwar/presentation/start/start_screen.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
-      // start route
-      case Routes.start:
+      // start screen
+      case Routes.startScreen:
         return MaterialPageRoute(
-          builder: (_) => const StartScreen(),
+          builder: (context) => const StartScreen(),
         );
 
       // auth routes
-      case Routes.login:
+      case Routes.loginScreen:
         return MaterialPageRoute(
-          builder: (_) => const LoginScreen(),
-        );
-      case Routes.register:
-        return MaterialPageRoute(
-          builder: (_) => const RegisterScreen(),
-        );
-      case Routes.waiting:
-        return MaterialPageRoute(
-          builder: (_) => const WaitingScreen(),
+          builder: (context) => LoginScreen(),
         );
 
-      // layout routes
-      case Routes.layout:
+      case Routes.waitingScreen:
         return MaterialPageRoute(
-          builder: (_) => const LayoutScreen(),
+          builder: (context) => const WaitingScreen(),
         );
-      case Routes.home:
+
+      case Routes.askUserRole:
         return MaterialPageRoute(
-          builder: (_) => const HomeScreen(),
+          builder: (context) => const AskUserRole(),
         );
-      case Routes.personal:
+
+      case Routes.passengerRegister:
         return MaterialPageRoute(
-          builder: (_) => const PersonalScreen(),
+          builder: (context) => const PassengerRegisterScreen(),
         );
-      case Routes.maps:
+
+      case Routes.captainRegister:
         return MaterialPageRoute(
-          builder: (_) => const MapScreen(),
+          builder: (context) => const CaptainRegisterScreen(),
         );
-      case Routes.messages:
+
+      // home passenger
+      case Routes.passengerHome:
         return MaterialPageRoute(
-          builder: (_) => const MessagesScreen(),
+          builder: (context) => PassengerHomeScreen(),
+        );
+
+      // home passenger ==> carpool section
+      case Routes.passengerCarpool:
+        return MaterialPageRoute(
+          builder: (context) => const PassengerCarpool(),
+        );
+
+      case Routes.passengerBuildNewCarpool:
+        return MaterialPageRoute(
+          builder: (context) => const PassengerBuildNewCarpool(),
+        );
+
+      case Routes.passengerBuildMyCarpools:
+        return MaterialPageRoute(
+          builder: (context) => const PassengerBuildMyCarpools(),
+        );
+
+      case Routes.passengerBuildMyCurrentCarpools:
+        return MaterialPageRoute(
+          builder: (context) => const PassengerBuildMyCurrentCarpools(),
+        );
+
+      case Routes.passengerBuildRateCarpool:
+        return MaterialPageRoute(
+          builder: (context) => const PassengerBuildRateCarpools(),
+        );
+
+      // home passenger ==> personal page section
+      case Routes.passengerPersonalPage:
+        return MaterialPageRoute(
+          builder: (context) => const PassengerPersonalPage(),
+        );
+
+      // home passenger ==> trips page section
+      case Routes.passengerTrips:
+        return MaterialPageRoute(
+          builder: (context) => const PassengerTrips(),
+        );
+
+      case Routes.passengerRequestTrips:
+        return MaterialPageRoute(
+          builder: (context) => const PassengerRequestTrips(),
+        );
+
+      case Routes.passengerAcceptedTrips:
+        return MaterialPageRoute(
+          builder: (context) => const PassengerAcceptedTrips(),
+        );
+
+      case Routes.passengerFinishedTrips:
+        return MaterialPageRoute(
+          builder: (context) => const PassengerFinishedTrips(),
         );
     }
     return null;

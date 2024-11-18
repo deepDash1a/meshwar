@@ -1,34 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:meshwar/core/theme/fonts/fonts.dart';
+import 'package:meshwar/core/shared/widgets/custom_text.dart';
+import 'package:meshwar/core/theme/colors/colors.dart'; // If you're using screen util
 
-// ignore: must_be_immutable
 class CustomTextButton extends StatelessWidget {
-  CustomTextButton({
+  final String text;
+  final VoidCallback onPressed;
+  final Color? textColor;
+  final TextStyle? textStyle;
+  final double? horizontalPadding;
+  final double? verticalPadding;
+
+  const CustomTextButton({
     super.key,
     required this.text,
-    required this.function,
-    this.color,
+    required this.onPressed,
+    this.textColor,
+    this.textStyle,
+    this.horizontalPadding,
+    this.verticalPadding,
   });
-
-  final String text;
-  final Function function;
-  Color? color;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {
-        function();
-      },
-      child: Text(
-        text,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: 16.00.sp,
-          fontFamily: FontNamesManager.bold,
-          color: color,
-        ),
+      onPressed: onPressed,
+      style: TextButton.styleFrom(
+        foregroundColor: textColor ?? ColorsManager.darkOrange,
+        // Default text color
+        textStyle: textStyle ??
+            const TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
+            ),
+      ),
+      child: CustomText(
+        text: text,
       ),
     );
   }

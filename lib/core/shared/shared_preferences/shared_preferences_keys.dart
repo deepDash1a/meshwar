@@ -1,5 +1,7 @@
 class SharedPreferencesKeys {
-  static const String start = 'start_screen';
+  static const String startScreen = 'false';
+
   static const String userToken = 'userToken';
-  static const String fcmToken = 'fcmToken';
+  static const String userRole = 'userRole';
+  static const String userStatus = 'userStatus';
 }

@@ -1,0 +1,15 @@
+{
+  "results": [
+    {
+      "formatted_address": "شارع التحرير, Madinet Beba, Biba, Beni Suef Governorate 2655254, Egypt",
+      "geometry": {
+        "location": {
+          "lat": 28.922784,
+          "lng": 30.98325
+        }
+      },
+      "name": "بنك مصر",
+      "place_id": "ChIJqeFj3gM0WhQRzt5ZAHpCxF8",
+    }
+  ]
+}

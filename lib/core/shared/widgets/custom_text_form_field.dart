@@ -3,87 +3,92 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meshwar/core/theme/colors/colors.dart';
 import 'package:meshwar/core/theme/fonts/fonts.dart';
 
-// ignore: must_be_immutable
 class CustomTextFormField extends StatelessWidget {
-  CustomTextFormField({
+  final String hintText;
+  final Widget prefixIcon;
+  final TextEditingController controller;
+  final TextInputType inputType;
+  final bool obscureText;
+  final Widget? suffixIcon;
+  final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
+  final VoidCallback? onTap;
+  final bool readOnly;
+
+  const CustomTextFormField({
     super.key,
+    required this.hintText,
+    required this.prefixIcon,
     required this.controller,
-    required this.label,
-    required this.validatorText,
-    this.regexValidateText,
+    required this.inputType,
     this.obscureText = false,
-    this.appRegex,
     this.suffixIcon,
-    this.prefixIcon,
-    this.textInputType,
+    this.validator,
+    this.onChanged,
+    this.onTap,
     this.readOnly = false,
   });
 
-  final TextEditingController controller;
-  String? appRegex;
-  bool obscureText;
-  bool readOnly;
-  final String label;
-  Widget? prefixIcon;
-  Widget? suffixIcon;
-  TextInputType? textInputType;
-  final String validatorText;
-  String? regexValidateText;
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.00.r),
+    return TextFormField(
+      controller: controller,
+      keyboardType: inputType,
+      obscureText: obscureText,
+      onChanged: onChanged,
+      validator: validator,
+      onTap: onTap,
+      readOnly: readOnly,
+      style: const TextStyle(
+        fontSize: 16.0,
+        fontFamily: FontManager.regular,
+        color: Colors.black87,
       ),
-      child: TextFormField(
-        controller: controller,
-        keyboardType: textInputType,
-        obscureText: obscureText,
-        validator: (value) {
-          // Check if the value is null or empty
-          if (value == null || value.isEmpty) {
-            return validatorText; // Return custom error message for empty input
-          }
-          // Perform regex validation
-          final regex = RegExp(appRegex!);
-          if (!regex.hasMatch(value)) {
-            return regexValidateText; // Return custom error message for regex validation failure
-          }
-          return null; // Return null if validation passes
-        },
-        style: TextStyle(
-          fontSize: 14.00.sp,
-          fontFamily: FontNamesManager.regular,
-          color: ColorsManager.mainAppColor,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: ColorsManager.white,
+        hintText: hintText,
+        hintStyle: const TextStyle(
+          color: ColorsManager.grey,
+          fontFamily: FontManager.regular,
         ),
-        decoration: InputDecoration(
-          labelText: label,
-          labelStyle: TextStyle(
-            fontSize: 14.00.sp,
-            fontFamily: FontNamesManager.bold,
-            color: ColorsManager.mainAppColor,
-          ),
-          errorStyle: TextStyle(
-            fontSize: 12.00.sp,
-            color: ColorsManager.red,
-            fontFamily: FontNamesManager.bold,
-          ),
-          contentPadding: EdgeInsets.symmetric(
-            vertical: 10.00.h,
-            horizontal: 20.00.w,
-          ),
-          suffixIcon: suffixIcon,
-          prefixIcon: prefixIcon,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.00.r),
-            borderSide: BorderSide(
-              color: ColorsManager.mainAppColor,
-              width: 1.00.w,
-            ),
-          ),
+        errorStyle: TextStyle(
+          color: ColorsManager.red,
+          fontSize: 10.00.sp,
+          fontFamily: FontManager.regular,
         ),
-        readOnly: readOnly,
+        prefixIcon: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.00.w),
+          child: prefixIcon,
+        ),
+        suffixIcon: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.00.w),
+          child: suffixIcon,
+        ),
+        contentPadding:
+            EdgeInsets.symmetric(vertical: 10.00.h, horizontal: 20.00.w),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.00.r),
+          borderSide:
+              BorderSide(color: ColorsManager.darkOrange, width: 1.00.w),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.00.r),
+          borderSide:
+              BorderSide(color: ColorsManager.darkOrange, width: 1.00.w),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.00.r),
+          borderSide: BorderSide(color: ColorsManager.grey, width: 1.0.w),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.00.r),
+          borderSide: BorderSide(color: ColorsManager.red, width: 1.0.w),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.00.r),
+          borderSide: BorderSide(color: ColorsManager.red, width: 1.0.w),
+        ),
       ),
     );
   }

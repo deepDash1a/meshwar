@@ -30,21 +30,21 @@ class CustomDropDownButton<T> extends StatelessWidget {
     InputBorder border = OutlineInputBorder(
       borderRadius: BorderRadius.circular(16.00.r),
       borderSide: BorderSide(
-        color: ColorsManager.mainAppColor,
+        color: ColorsManager.darkOrange,
         width: 1.w,
       ),
     );
     InputBorder focusedBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(16.r),
       borderSide: BorderSide(
-        color: ColorsManager.mainAppColor,
+        color: ColorsManager.darkOrange,
         width: 1.5.w,
       ),
     );
     InputBorder errorBorderColor = OutlineInputBorder(
       borderRadius: BorderRadius.circular(16.r),
       borderSide: BorderSide(
-        color: ColorsManager.mainAppColor,
+        color: ColorsManager.darkOrange,
         width: 1.5.w,
       ),
     );
@@ -68,19 +68,21 @@ class CustomDropDownButton<T> extends StatelessWidget {
         prefixIcon: prefixIcon,
         hintStyle: TextStyle(
           fontSize: 16.sp,
-          fontFamily: FontNamesManager.regular,
+          fontFamily: FontManager.bold,
         ),
         border: border,
         contentPadding: EdgeInsetsDirectional.only(
           start: 12.w,
           end: 4.w,
+          // bottom: 4.h,
+          // top: 4.h,
         ),
         focusedBorder: focusedBorder,
         enabledBorder: border,
         disabledBorder: border,
         errorBorder: errorBorderColor,
         errorStyle: TextStyle(
-          fontFamily: FontNamesManager.bold,
+          fontFamily: FontManager.bold,
           fontSize: 12.00.sp,
           color: ColorsManager.red,
         ),
